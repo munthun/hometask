@@ -1,0 +1,33 @@
+lsof -P | grep ':PortNumber' | awk '{print $2}' | xargs kill -9 
+	-Clearing port 8080 on mac
+
+Simple Spring API which lives on Port 8080
+
+
+URLS to Test:
+
+URL --> Expected Result
+
+http://localhost:8080/greeting/ --> Simple Hello statement
+
+http://localhost:8080/request/ --> You need to have an account number statement
+
+http://localhost:8080/request/123/source1
+	-123 is the account number
+	-source1 is the given source
+	
+	
+(multiple sources given in the input)
+http://localhost:8080/request/123/source1,source2,source3 --> [{"source":"source1","isValid":true},{"source":"source2","isValid":true},{"source":"source3","isValid":true}]
+	- 123 is the account number
+	- source1,source2,source3
+	- Returns an Array List of responses(Source,IsValid)
+	
+	
+(no sources given so the 2 configured sources are used)	
+http://localhost:8080/request/123/
+
+Notes: We could use a DataSource implementation to configure actual sources(currently the isValid value is random for testing purposes)
+
+	
+	
